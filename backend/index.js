@@ -1,2 +1,1 @@
-console.log("Hello Ken")
-console.log('Testing Conflict')
+const hello = 'hello'
