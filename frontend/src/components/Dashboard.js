@@ -69,11 +69,11 @@ const Dashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user, index => ( 
-          <tr key={user.id}>
+          {users.map((users, index) => ( 
+          <tr key={users.id}>
             <td>{index +1}</td>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
+            <td>{users.name}</td>
+            <td>{users.email}</td>
           </tr>))}
         </tbody>
       </table>
