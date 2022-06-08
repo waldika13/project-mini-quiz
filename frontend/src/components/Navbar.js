@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 
@@ -94,6 +94,9 @@ function Navbar() {
          <a href='/home' className="navbar-item">
            Home
          </a>
+         <a href='/home' className="navbar-item">
+           Profile
+         </a>
    
          {/* <a className="navbar-item">
            Documentation
@@ -144,8 +147,8 @@ function Navbar() {
      <thead>
        <tr>
          <th>No</th>
-         <th>Name</th>
-         <th>Email</th>
+         <th>Fullname</th>
+         <th>address</th>
        </tr>
      </thead>
        <tbody>
