@@ -5,9 +5,6 @@ import { useNavigate } from 'react-router-dom';
 function Navbar() {
   const navigate = useNavigate();
 
-
-
-  const [name, setName] = useState('');
   const [products, setProduct] = useState([]);
 
    
@@ -33,9 +30,8 @@ const getProducts = async () => {
    <nav className="navbar is-light" role="navigation" aria-label="main navigation">
      <div className="container">
      <div className="navbar-brand">
-       <a className="navbar-item" href="https://bulma.io">
-         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
-       </a>
+     <div className="navbar-item is-size-4">Mini Quiz
+            </div>
    
        <a href='/' role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
          <span aria-hidden="true"></span>
@@ -60,7 +56,6 @@ const getProducts = async () => {
         <div className="navbar-end">
             <div className="navbar-item">
             <div className="buttons">
-
                 <button onClick={Logout} className="button is-primary">
                 Log Out
                 </button>
@@ -70,8 +65,7 @@ const getProducts = async () => {
         </div>
      </div>
    </nav>
-   <div className='container mt-5'>
-   <h1> wellcome back : {name}</h1>
+   <div className="container mt-6 ">
    <table className="table is-striped is-fullwidth">
      <thead>
        <tr>
@@ -79,6 +73,7 @@ const getProducts = async () => {
          <th>Fullname</th>
          <th>address</th>
          <th>phone</th>
+         <th>mail</th>
          
        </tr>
      </thead>
@@ -89,6 +84,7 @@ const getProducts = async () => {
            <td>{products.name}</td>
            <td>{products.address}</td>
            <td>{products.phone}</td>
+           <td>{products.mail}</td>
          </tr>))}
        </tbody>
    </table>

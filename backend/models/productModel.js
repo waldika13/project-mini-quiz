@@ -12,6 +12,9 @@ const Product = db.define('products',{
     },
     phone:{
         type: DataTypes.STRING
+    },
+    mail:{
+        type: DataTypes.STRING
     }
 },{
     freezeTableName: true
