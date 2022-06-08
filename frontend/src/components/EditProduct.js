@@ -3,16 +3,16 @@ import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
  
 const EditProduct = () => {
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
     const { id } = useParams();
     const navigate = useNavigate();
  
     const updateProduct = async (e) => {
         e.preventDefault();
         await axios.patch(`http://localhost:5000/products/${id}`,{
-            title: title,
-            price: price
+            name: name,
+            address: address
         });
         navigate('/');
     }
@@ -23,32 +23,32 @@ const EditProduct = () => {
  
     const getProductById = async () => {
         const response = await axios.get(`http://localhost:5000/products/${id}`);
-        setTitle(response.data.title);
-        setPrice(response.data.price);
+        setName(response.data.name);
+        setAddress(response.data.address);
     }
  
     return (
         <div>
             <form onSubmit={ updateProduct }>
                 <div className="field">
-                    <label className="label">Title</label>
+                    <label className="label">Full Name</label>
                     <input 
                         className="input"
                         type="text"
-                        placeholder="Title"
-                        value={ title }
-                        onChange={ (e) => setTitle(e.target.value) }
+                        placeholder="Name"
+                        value={ name }
+                        onChange={ (e) => setName(e.target.value) }
                     />
                 </div>
  
                 <div className="field">
-                    <label className="label">Price</label>
+                    <label className="label">Address</label>
                     <input 
                         className="input"
                         type="text"
-                        placeholder="Price"
-                        value={ price }
-                        onChange={ (e) => setPrice(e.target.value) }
+                        placeholder="address"
+                        value={ address }
+                        onChange={ (e) => setAddress(e.target.value) }
                     />
                 </div>
  

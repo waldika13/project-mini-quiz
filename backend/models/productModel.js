@@ -4,10 +4,10 @@ import db from "../config/database.js";
 const { DataTypes } = Sequelize;
  
 const Product = db.define('products',{
-    title:{
+    name:{
         type: DataTypes.STRING
     },
-    price:{
+    address:{
         type: DataTypes.STRING
     }
 },{

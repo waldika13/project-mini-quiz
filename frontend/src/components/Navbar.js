@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -9,61 +8,17 @@ function Navbar() {
 
 
   const [name, setName] = useState('');
-  const [token, setToken] = useState ('');
-  const [expired, setExpired] = useState ('');
-  const [users, setUsers] = useState ([]);
+  const [products, setProduct] = useState([]);
 
-    useEffect(() => {
-      refreshToken();
-      getUsers();
-    }, []);
+   
+  useEffect(() => {
+    getProducts();
+}, []);
 
-  const refreshToken = async() => {
-    try {
-      const response = await axios.get('http://localhost:5000/token');
-      setToken(response.data.accessToken);
-      const decoded = jwt_decode(response.data.accessToken);
-      setName(decoded.name);
-      setExpired(decoded.exp);
-    } catch (error) {
-      if(error.response){
-        navigate('/');
-      }
-    }
-  }
-
-  const axiosJWT = axios.create();
-
-  axiosJWT.interceptors.request.use(async(config) =>{
-    const currentDate = new Date();
-    if(expired * 1000 < currentDate.getTime()){
-      const response = await axios.get('http://localhost:5000/token');
-      config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-      setToken (response.data.accessToken);
-      const decode = jwt_decode(response.data.accessToken);
-      setName(decode.name);
-      setExpired(decode.exp);
-    }
-    return config;
-
-  }, (error)=>{
-    return Promise.reject(error);
-  });
-  
-  const getUsers = async() =>{
-    const response = await axiosJWT.get('http://localhost:5000/users',{
-    headers:{
-      Authorization:`Bearer ${token}`
-    }
-  });
-    setUsers(response.data);
-  }
-
-
-
-
-  
-
+const getProducts = async () => {
+    const response = await axios.get('http://localhost:5000/products');
+    setProduct(response.data);
+}
   const Logout =async() => {
     try {
       await axios.delete('http://localhost:5000/logout');
@@ -94,44 +49,19 @@ function Navbar() {
          <a href='/home' className="navbar-item">
            Home
          </a>
-         <a href='/home' className="navbar-item">
+         <a href='/dashboard' className="navbar-item">
            Profile
          </a>
-   
-         {/* <a className="navbar-item">
-           Documentation
-         </a> */}
-   
-         {/* <div className="navbar-item has-dropdown is-hoverable">
-           <a className="navbar-link">
-             More
-           </a>
-   
-           <div className="navbar-dropdown">
-             <a className="navbar-item">
-               About
-             </a>
-             <a className="navbar-item">
-               Jobs
-             </a>
-             <a className="navbar-item">
-               Contact
-             </a>
-             <hr className="navbar-divider">
-             <a className="navbar-item">
-               Report an issue
-             </a>
-           </div>
-         </div> */}
+         <a href='/add' className="navbar-item">
+           Tambah Data
+         </a>
        </div>
     
         <div className="navbar-end">
             <div className="navbar-item">
             <div className="buttons">
-                {/* <a className="button is-primary">
-                <strong>Sign up</strong>
-                </a> */}
-                <button onClick={Logout} className="button is-light">
+
+                <button onClick={Logout} className="button is-primary">
                 Log Out
                 </button>
             </div>
@@ -142,7 +72,6 @@ function Navbar() {
    </nav>
    <div className='container mt-5'>
    <h1> wellcome back : {name}</h1>
-   <button onClick={getUsers} className='button is-info'> Get Users</button>
    <table className="table is-striped is-fullwidth">
      <thead>
        <tr>
@@ -152,11 +81,11 @@ function Navbar() {
        </tr>
      </thead>
        <tbody>
-         {users.map((users, index) => ( 
-         <tr key={users.id}>
+         {products.map((products, index) => ( 
+         <tr key={products.id}>
            <td>{index +1}</td>
-           <td>{users.name}</td>
-           <td>{users.email}</td>
+           <td>{products.name}</td>
+           <td>{products.address}</td>
          </tr>))}
        </tbody>
    </table>

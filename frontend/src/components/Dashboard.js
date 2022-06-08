@@ -26,8 +26,8 @@ const Dashboard = () => {
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Title</th>
-                        <th>Price</th>
+                        <th>Full Name</th>
+                        <th>Address</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -35,8 +35,8 @@ const Dashboard = () => {
                     { products.map((products, index) => (
                         <tr key={ products.id }>
                             <td>{ index + 1 }</td>
-                            <td>{ products.title }</td>
-                            <td>{ products.price }</td>
+                            <td>{ products.name }</td>
+                            <td>{ products.address }</td>
                             <td>
                                 <Link to={`/edit/${products.id}`} className="button is-small is-info">Edit</Link>
                                 <button onClick={ () => deleteProduct(products.id) } className="button is-small is-danger">Delete</button>
