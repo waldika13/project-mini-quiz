@@ -9,8 +9,8 @@ function App() {
       <Routes> 
         <Route exact path="/" element={<Login/>} />
         <Route  path="/register" element={<Register/>} />
-        <Route  path="/dashboard" element={<Dashboard/>}  />
-        <Route  path="/logout" element={<Navbar/>}  />
+        {/* <Route  path="/dashboard" element={<Dashboard/>}  /> */}
+        <Route  path="/home" element={<Navbar/>}  />
        
       </Routes>
     </Router>

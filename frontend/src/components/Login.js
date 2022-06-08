@@ -18,12 +18,16 @@ const Login = () => {
                 password: password,
                 
             });
-            navigate('/dashboard');
+            navigate('/home');
         } catch (error) {
              if(error.response){
                  setMsg(error.response.data.msg);
              }
         }    
+    }
+    const Register = (e) => {
+        e.preventDefault();
+        navigate('/register/' );
     }
   return (
     <section className="hero has-background-grey-light is-success is-fullheight is-fullwidth">
@@ -49,6 +53,7 @@ const Login = () => {
                       </div>
                       <div className="fields mt-5">
                          <button className='button is-success is-fullwidth'>Login</button>
+                         <button onClick={Register} className="button is-light is-fullwidth">Register </button>
                       </div>
                   </form>
               </div>

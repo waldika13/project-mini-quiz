@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axios from "axios";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -7,7 +7,7 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
-    const [msg, setMsg] = useState('');
+  
     const navigate = useNavigate();
 
     const Register = async(e) =>{
@@ -21,9 +21,7 @@ const Register = () => {
             });
             navigate('/');
         } catch (error) {
-             if(error.response){
-                 setMsg(error.response.data.msg);
-             }
+            
         }    
     }
   return (
@@ -34,7 +32,6 @@ const Register = () => {
               <div className="column is-4-desktop">
                  
                   <form onSubmit={Register} className=' box'>
-                     <p className='has-text-centered'>{msg}</p> 
                       <div className="fields mt-5">
                           <label className="label">Nama</label>
                           <div className="control">
