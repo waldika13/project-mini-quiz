@@ -5,13 +5,15 @@ import { useNavigate } from 'react-router-dom';
 const AddProduct = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
     const navigate = useNavigate();
  
     const saveProduct = async (e) => {
         e.preventDefault();
         await axios.post('http://localhost:5000/products',{
             name: name,
-            address: address
+            address: address,
+            phone: phone
         });
         navigate('/home');
     }
@@ -38,6 +40,17 @@ const AddProduct = () => {
                         placeholder="Address"
                         value={ address }
                         onChange={ (e) => setAddress(e.target.value) }
+                    />
+                </div>
+
+                <div className="field">
+                    <label className="label">Phone</label>
+                    <input 
+                        className="input"
+                        type="text"
+                        placeholder="Phone"
+                        value={ phone }
+                        onChange={ (e) => setPhone(e.target.value) }
                     />
                 </div>
  

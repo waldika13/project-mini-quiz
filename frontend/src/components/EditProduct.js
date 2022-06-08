@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 const EditProduct = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
     const { id } = useParams();
     const navigate = useNavigate();
  
@@ -25,6 +26,7 @@ const EditProduct = () => {
         const response = await axios.get(`http://localhost:5000/products/${id}`);
         setName(response.data.name);
         setAddress(response.data.address);
+        setAddress(response.data.phone);
     }
  
     return (
@@ -49,6 +51,17 @@ const EditProduct = () => {
                         placeholder="address"
                         value={ address }
                         onChange={ (e) => setAddress(e.target.value) }
+                    />
+                </div>
+
+                <div className="field">
+                    <label className="label">Phone</label>
+                    <input 
+                        className="input"
+                        type="text"
+                        placeholder="phone"
+                        value={ phone }
+                        onChange={ (e) => setPhone(e.target.value) }
                     />
                 </div>
  

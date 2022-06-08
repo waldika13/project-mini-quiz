@@ -78,6 +78,8 @@ const getProducts = async () => {
          <th>No</th>
          <th>Fullname</th>
          <th>address</th>
+         <th>phone</th>
+         
        </tr>
      </thead>
        <tbody>
@@ -86,6 +88,7 @@ const getProducts = async () => {
            <td>{index +1}</td>
            <td>{products.name}</td>
            <td>{products.address}</td>
+           <td>{products.phone}</td>
          </tr>))}
        </tbody>
    </table>

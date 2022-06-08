@@ -28,6 +28,7 @@ const Dashboard = () => {
                         <th>No</th>
                         <th>Full Name</th>
                         <th>Address</th>
+                        <th>Phone</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -37,6 +38,7 @@ const Dashboard = () => {
                             <td>{ index + 1 }</td>
                             <td>{ products.name }</td>
                             <td>{ products.address }</td>
+                            <td>{ products.phone}</td>
                             <td>
                                 <Link to={`/edit/${products.id}`} className="button is-small is-info">Edit</Link>
                                 <button onClick={ () => deleteProduct(products.id) } className="button is-small is-danger">Delete</button>
