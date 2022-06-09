@@ -7,7 +7,7 @@ const Users = db.define('users', {
     name:{
         type:DataTypes.STRING
     },
-    email:{
+    username:{
         type:DataTypes.STRING
     },
     password:{

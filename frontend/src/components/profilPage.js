@@ -4,22 +4,22 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 
-const Dashboard = () => {
+const ProfilPage = () => {
     const navigate = useNavigate();
-    const [products, setProduct] = useState([]);
+    const [profile, setProfile] = useState([]);
  
     useEffect(() => {
-        getProducts();
+        getProfile();
     }, []);
  
-    const getProducts = async () => {
-        const response = await axios.get('http://localhost:5000/products');
-        setProduct(response.data);
+    const getProfile = async () => {
+        const response = await axios.get('http://localhost:5000/profile');
+        setProfile(response.data);
     }
  
-    const deleteProduct = async (id) => {
-        await axios.delete(`http://localhost:5000/products/${id}`);
-        getProducts();
+    const deleteProfile = async (id) => {
+        await axios.delete(`http://localhost:5000/profile/${id}`);
+        getProfile();
     }
 
     const Logout =async() => {
@@ -31,7 +31,10 @@ const Dashboard = () => {
         }
     
       }
-
+      const Kembali = (e) => {
+        e.preventDefault();
+        navigate('/home/' );
+    }
  
     return (
         <div>
@@ -53,7 +56,7 @@ const Dashboard = () => {
               <a href='/home' className="navbar-item">
                 Home
               </a>
-              <a href='/dashboard' className="navbar-item">
+              <a href='/profilPage' className="navbar-item">
                 Profile
               </a>
               <a href='/add' className="navbar-item">
@@ -73,9 +76,18 @@ const Dashboard = () => {
              </div>
           </div>
         </nav>
+        <section class="hero is-primary ">
+  <div class="hero-body">
+  <div class="container has-text-centered">
+    <p class="title is-centered">
+      Halaman Profile
+    </p>
+    </div>
+  </div>
+</section>
         <div className='container mt-5'>
-            <Link to="/add" className="button is-primary mt-2">Add New</Link>
-            <table className="table is-striped is-fullwidth">
+            <Link to="/add" className="button is-primary mt-2 mb-5">Add New</Link>
+            <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -87,25 +99,26 @@ const Dashboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    { products.map((products, index) => (
-                        <tr key={ products.id }>
+                    { profile.map((profile, index) => (
+                        <tr key={ profile.id }>
                             <td>{ index + 1 }</td>
-                            <td>{ products.name }</td>
-                            <td>{ products.address }</td>
-                            <td>{ products.phone}</td>
-                            <td>{ products.mail}</td>
-                            <td>
-                                <Link to={`/edit/${products.id}`} className="button is-small is-info">Edit</Link>
-                                <button onClick={ () => deleteProduct(products.id) } className="button is-small is-danger">Delete</button>
+                            <td>{ profile.name }</td>
+                            <td>{ profile.address }</td>
+                            <td>{ profile.phone}</td>
+                            <td>{ profile.mail}</td>
+                            <td className='has-text-centered'>
+                                <Link to={`/edit/${profile.id}`} className="button is-small is-info mr-2">Edit</Link>
+                                <button onClick={ () => deleteProfile(profile.id) } className="button is-small is-danger">Delete</button>
                             </td>
                         </tr>
                     )) }
-                     
+                    
                 </tbody>
             </table>
+            <button onClick={Kembali} className="button is-light ">Kembali </button>
         </div>
         </div>
     )
 }
 
-export default Dashboard
+export default ProfilPage

@@ -2,20 +2,22 @@ import { useState } from 'react'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
  
-const AddProduct = () => {
+const AddProfile = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [mail, setMail] = useState('');
     const navigate = useNavigate();
  
-    const saveProduct = async (e) => {
+    const saveProfile = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/products',{
+        await axios.post('http://localhost:5000/profile',{
             name: name,
             address: address,
-            phone: phone
+            phone: phone,
+            mail : mail
         });
+        alert("Data Telah ditambahkan");
         navigate('/home');
     }
     
@@ -28,7 +30,10 @@ const AddProduct = () => {
         }
     
       }
-
+      const Kembali = (e) => {
+        e.preventDefault();
+        navigate('/profilPage/' );
+    }
     return (
         <div>
         <nav className="navbar is-light" role="navigation" aria-label="main navigation">
@@ -49,7 +54,7 @@ const AddProduct = () => {
               <a href='/home' className="navbar-item">
                 Home
               </a>
-              <a href='/dashboard' className="navbar-item">
+              <a href='/profilPage' className="navbar-item">
                 Profile
               </a>
               <a href='/add' className="navbar-item">
@@ -69,8 +74,17 @@ const AddProduct = () => {
              </div>
           </div>
         </nav>
+        <section class="hero is-primary ">
+  <div class="hero-body">
+  <div class="container has-text-centered">
+    <p class="title is-centered">
+      Halaman Tambah
+    </p>
+    </div>
+  </div>
+</section>
         <div className='container mt-5'>
-            <form onSubmit={ saveProduct }>
+            <form onSubmit={ saveProfile }>
                 <div className="field">
                     <label className="label">Full Name</label>
                     <input 
@@ -115,7 +129,8 @@ const AddProduct = () => {
                 </div>
  
                 <div className="field">
-                    <button className="button is-primary">Save</button>
+                    <button className="button is-primary mr-2">Save</button>
+                    <button onClick={Kembali} className="button is-light ">Kembali </button>
                 </div>
             </form>
         </div>
@@ -123,4 +138,4 @@ const AddProduct = () => {
     )
 }
  
-export default AddProduct
+export default AddProfile

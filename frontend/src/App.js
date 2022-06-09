@@ -1,20 +1,20 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
-import Navbar from "./components/Navbar";
+import Home from "./components/Home";
 import Register from "./components/Register";
-import AddProduct from "./components/AddProduct";
-import EditProduct from "./components/EditProduct";
-import Dashboard from "./components/Dashboard";
+import AddProfile from "./components/AddProfile";
+import EditProfile from "./components/EditProfile";
+import ProfilPage from "./components/profilPage";
 function App() {
   return (
     <Router>
       <Routes> 
         <Route exact path="/" element={<Login/>} />
         <Route  path="/register" element={<Register/>} />
-        <Route  path="/dashboard" element={<Dashboard/>}  /> 
-        <Route  path="/home" element={<Navbar/>}  />      
-        <Route  path="/add" element={<AddProduct/>}  />
-        <Route  path="/edit/:id" element={<EditProduct/>}  /> 
+        <Route  path="/profilPage" element={<ProfilPage/>}  /> 
+        <Route  path="/home" element={<Home/>}  />      
+        <Route  path="/add" element={<AddProfile/>}  />
+        <Route  path="/edit/:id" element={<EditProfile/>}  /> 
       </Routes>
     </Router>
   );

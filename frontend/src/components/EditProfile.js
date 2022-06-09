@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
  
-const EditProduct = () => {
+const EditProfile = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
@@ -10,19 +10,21 @@ const EditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
  
-    const updateProduct = async (e) => {
+    const updateProfile = async (e) => {
         e.preventDefault();
-        await axios.patch(`http://localhost:5000/products/${id}`,{
+        await axios.patch(`http://localhost:5000/profile/${id}`,{
             name: name,
             address: address,
             phone: phone
         });
-        navigate('/dashboard');
+        alert("Data Telah terupdate");
+        navigate('/profilPage');
     }
 
     const Logout =async() => {
         try {
           await axios.delete('http://localhost:5000/logout');
+          alert("Anda telah logout");
           navigate('/');
         } catch (error) {
           console.log(error);
@@ -31,16 +33,20 @@ const EditProduct = () => {
       }
  
     useEffect(() => {
-        getProductById();
+        getProfileById();
     }, []);
  
-    const getProductById = async () => {
-        const response = await axios.get(`http://localhost:5000/products/${id}`);
+    const getProfileById = async () => {
+        const response = await axios.get(`http://localhost:5000/profile/${id}`);
         setName(response.data.name);
         setAddress(response.data.address);
         setPhone(response.data.phone);
         setMail(response.data.mail);
     }
+    const Kembali = (e) => {
+      e.preventDefault();
+      navigate('/profilPage/' );
+  }
  
     return (
         <div>
@@ -62,7 +68,7 @@ const EditProduct = () => {
          <a href='/home' className="navbar-item">
            Home
          </a>
-         <a href='/dashboard' className="navbar-item">
+         <a href='/profilPage' className="navbar-item">
            Profile
          </a>
          <a href='/add' className="navbar-item">
@@ -82,8 +88,17 @@ const EditProduct = () => {
         </div>
      </div>
    </nav>
+   <section class="hero is-primary ">
+  <div class="hero-body">
+  <div class="container has-text-centered">
+    <p class="title is-centered">
+      Halaman Edit
+    </p>
+    </div>
+  </div>
+</section>
         <div className='container mt-5'>
-            <form onSubmit={ updateProduct }>
+            <form onSubmit={ updateProfile }>
                 <div className="field">
                     <label className="label">Full Name</label>
                     <input 
@@ -130,6 +145,7 @@ const EditProduct = () => {
  
                 <div className="field">
                     <button className="button is-primary">Update</button>
+                    <button onClick={Kembali} className="button is-light ">Kembali </button>
                 </div>
             </form>
         </div>
@@ -137,4 +153,4 @@ const EditProduct = () => {
     )
 }
  
-export default EditProduct
+export default EditProfile
