@@ -30,17 +30,17 @@ const Login = () => {
         navigate('/register/' );
     }
   return (
-    <section className="hero has-background-grey-light is-success is-fullheight is-fullwidth">
+    <section className="hero has-background-white-ter is-fullheight is-fullwidth">
       <div className="hero-body">
         <div className="container">
-          <div className="columns">
+          <div className="columns is-centered ">
               <div className="column is-4-desktop">
                   <form onSubmit={Auth} className=' box'>
-                       <p className='has-text-centered'>{msg}</p>
+                       <p className='has-text-centered has-text-danger-dark'>{msg}</p>
                       <div className="fields mt-5">
-                          <label className="label">Email or Username</label>
+                          <label className="label">Email</label>
                           <div className="control">
-                              <input type="text" className="input" placeholder='Username'
+                              <input type="text" className="input" placeholder='Email'
                               value={email} onChange={(e) => setEmail(e.target.value)}/>
                           </div>
                       </div>
@@ -53,6 +53,7 @@ const Login = () => {
                       </div>
                       <div className="fields mt-5">
                          <button className='button is-success is-fullwidth'>Login</button>
+                         <label className="label has-text-centered mt-2">OR</label>
                          <button onClick={Register} className="button is-light is-fullwidth">Register </button>
                       </div>
                   </form>

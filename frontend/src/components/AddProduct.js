@@ -2,19 +2,20 @@ import { useState } from 'react'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
  
-const AddProduct = () => {
+const AddProfile = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [mail, setMail] = useState('');
     const navigate = useNavigate();
  
-    const saveProduct = async (e) => {
+    const saveProfile = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/products',{
+        await axios.post('http://localhost:5000/profile',{
             name: name,
             address: address,
-            phone: phone
+            phone: phone,
+            mail: mail,
         });
         navigate('/home');
     }
@@ -45,7 +46,8 @@ const AddProduct = () => {
           </div>
 
           <div id="navbarBasicExample" className="navbar-menu">
-            <div className="navbar-start">
+          <div id="navbarBasicExample" className="navbar-menu">
+            <div className="navbar-end">
               <a href='/home' className="navbar-item">
                 Home
               </a>
@@ -55,22 +57,18 @@ const AddProduct = () => {
               <a href='/add' className="navbar-item">
                 Tambah Data
               </a>
+              <div className="navbar-item">
+                <div className="buttons">
+                  <button onClick={Logout} className="button is-danger">Log Out</button>
+                </div>
+              </div>
             </div>
-         
-             <div className="navbar-end">
-                 <div className="navbar-item">
-                 <div className="buttons">
-                 <button onClick={Logout} className="button is-primary">
-                Log Out
-                </button>
-                 </div>
-                 </div>
-             </div>
+          </div>
              </div>
           </div>
         </nav>
         <div className='container mt-5'>
-            <form onSubmit={ saveProduct }>
+            <form onSubmit={ saveProfile }>
                 <div className="field">
                     <label className="label">Full Name</label>
                     <input 
@@ -115,7 +113,8 @@ const AddProduct = () => {
                 </div>
  
                 <div className="field">
-                    <button className="button is-primary">Save</button>
+                    <button className="button is-primary mr-3 mt-3">Save</button>
+                    <a href='/' className="button is-danger mt-3">Cancel</a>
                 </div>
             </form>
         </div>
@@ -123,4 +122,4 @@ const AddProduct = () => {
     )
 }
  
-export default AddProduct
+export default AddProfile

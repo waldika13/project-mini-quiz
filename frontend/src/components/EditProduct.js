@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
  
-const EditProduct = () => {
+const EditProfile = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
@@ -10,12 +10,13 @@ const EditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
  
-    const updateProduct = async (e) => {
+    const updateProfile = async (e) => {
         e.preventDefault();
-        await axios.patch(`http://localhost:5000/products/${id}`,{
+        await axios.patch(`http://localhost:5000/profile/${id}`,{
             name: name,
             address: address,
-            phone: phone
+            phone: phone,
+            mail: mail
         });
         navigate('/dashboard');
     }
@@ -31,11 +32,11 @@ const EditProduct = () => {
       }
  
     useEffect(() => {
-        getProductById();
+        getProfileById();
     }, []);
  
-    const getProductById = async () => {
-        const response = await axios.get(`http://localhost:5000/products/${id}`);
+    const getProfileById = async () => {
+        const response = await axios.get(`http://localhost:5000/Profiles/${id}`);
         setName(response.data.name);
         setAddress(response.data.address);
         setPhone(response.data.phone);
@@ -83,7 +84,7 @@ const EditProduct = () => {
      </div>
    </nav>
         <div className='container mt-5'>
-            <form onSubmit={ updateProduct }>
+            <form onSubmit={ updateProfile }>
                 <div className="field">
                     <label className="label">Full Name</label>
                     <input 
@@ -137,4 +138,4 @@ const EditProduct = () => {
     )
 }
  
-export default EditProduct
+export default EditProfile

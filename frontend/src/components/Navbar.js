@@ -5,16 +5,16 @@ import { useNavigate } from 'react-router-dom';
 function Navbar() {
   const navigate = useNavigate();
 
-  const [products, setProduct] = useState([]);
+  const [Profile, setProfile] = useState([]);
 
    
   useEffect(() => {
-    getProducts();
+    getProfile();
 }, []);
 
-const getProducts = async () => {
-    const response = await axios.get('http://localhost:5000/products');
-    setProduct(response.data);
+const getProfile = async () => {
+    const response = await axios.get('http://localhost:5000/profile');
+    setProfile(response.data);
 }
   const Logout =async() => {
     try {
@@ -30,7 +30,7 @@ const getProducts = async () => {
    <nav className="navbar is-light" role="navigation" aria-label="main navigation">
      <div className="container">
      <div className="navbar-brand">
-     <div className="navbar-item is-size-4">Mini Quiz
+     <div className="navbar-item is-size-4 has-text-weight-bold">Mini Quiz
             </div>
    
        <a href='/' role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -41,27 +41,24 @@ const getProducts = async () => {
      </div>
    
      <div id="navbarBasicExample" className="navbar-menu">
-       <div className="navbar-start">
-         <a href='/home' className="navbar-item">
-           Home
-         </a>
-         <a href='/dashboard' className="navbar-item">
-           Profile
-         </a>
-         <a href='/add' className="navbar-item">
-           Tambah Data
-         </a>
-       </div>
-    
-        <div className="navbar-end">
-            <div className="navbar-item">
-            <div className="buttons">
-                <button onClick={Logout} className="button is-primary">
-                Log Out
-                </button>
+     <div id="navbarBasicExample" className="navbar-menu">
+            <div className="navbar-end">
+              <a href='/home' className="navbar-item">
+                Home
+              </a>
+              <a href='/dashboard' className="navbar-item">
+                Profile
+              </a>
+              <a href='/add' className="navbar-item">
+                Tambah Data
+              </a>
+              <div className="navbar-item">
+                <div className="buttons">
+                  <button onClick={Logout} className="button is-danger">Log Out</button>
+                </div>
+              </div>
             </div>
-            </div>
-        </div>
+          </div>
         </div>
      </div>
    </nav>
@@ -71,20 +68,20 @@ const getProducts = async () => {
        <tr>
          <th>No</th>
          <th>Fullname</th>
-         <th>address</th>
-         <th>phone</th>
-         <th>mail</th>
+         <th>Address</th>
+         <th>Phone</th>
+         <th>Email</th>
          
        </tr>
      </thead>
        <tbody>
-         {products.map((products, index) => ( 
-         <tr key={products.id}>
+         {Profile.map((Profile, index) => ( 
+         <tr key={Profile.id}>
            <td>{index +1}</td>
-           <td>{products.name}</td>
-           <td>{products.address}</td>
-           <td>{products.phone}</td>
-           <td>{products.mail}</td>
+           <td>{Profile.name}</td>
+           <td>{Profile.address}</td>
+           <td>{Profile.phone}</td>
+           <td>{Profile.mail}</td>
          </tr>))}
        </tbody>
    </table>

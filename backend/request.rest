@@ -1,4 +1,5 @@
 GET  http://localhost:5000/users
+Authorization: Bearer 
 
 ###
 POST   http://localhost:5000/users
@@ -8,13 +9,14 @@ Content-Type: application/json
     "name": "Fadilah",
     "email": "email@gmail.com",
     "password": "12345",
-    "confPassword": "12375"
+    "confPassword": "12345"
 }
 
 ###
 POST   http://localhost:5000/login
 Content-Type: application/json
+
 {
-    "email" : "email.gmail.com",
+    "email" : "email@gmail.com",
     "password" :"12345"
 }

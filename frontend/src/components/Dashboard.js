@@ -6,20 +6,20 @@ import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const [products, setProduct] = useState([]);
+    const [Profile, setProfile] = useState([]);
  
     useEffect(() => {
-        getProducts();
+        getProfile();
     }, []);
  
-    const getProducts = async () => {
-        const response = await axios.get('http://localhost:5000/products');
-        setProduct(response.data);
+    const getProfile = async () => {
+        const response = await axios.get('http://localhost:5000/profile');
+        setProfile(response.data);
     }
  
-    const deleteProduct = async (id) => {
-        await axios.delete(`http://localhost:5000/products/${id}`);
-        getProducts();
+    const deleteProfile = async (id) => {
+        await axios.delete(`http://localhost:5000/profile/${id}`);
+        getProfile();
     }
 
     const Logout =async() => {
@@ -38,7 +38,7 @@ const Dashboard = () => {
         <nav className="navbar is-light" role="navigation" aria-label="main navigation">
           <div className="container">
           <div className="navbar-brand">
-            <div className="navbar-item is-size-4">Mini Quiz
+            <div className="navbar-item is-size-4 has-text-weight-bold">Mini Quiz
             </div>
         
             <a href='/' role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -49,7 +49,7 @@ const Dashboard = () => {
           </div>
         
           <div id="navbarBasicExample" className="navbar-menu">
-            <div className="navbar-start">
+            <div className="navbar-end">
               <a href='/home' className="navbar-item">
                 Home
               </a>
@@ -59,44 +59,39 @@ const Dashboard = () => {
               <a href='/add' className="navbar-item">
                 Tambah Data
               </a>
+              <div className="navbar-item">
+                <div className="buttons">
+                  <button onClick={Logout} className="button is-danger">Log Out</button>
+                </div>
+              </div>
             </div>
-         
-             <div className="navbar-end">
-                 <div className="navbar-item">
-                 <div className="buttons">
-                 <button onClick={Logout} className="button is-primary">
-                Log Out
-                </button>
-                 </div>
-                 </div>
-             </div>
-             </div>
+          </div>
           </div>
         </nav>
         <div className='container mt-5'>
             <Link to="/add" className="button is-primary mt-2">Add New</Link>
-            <table className="table is-striped is-fullwidth">
+            <table className="table is-striped is-fullwidth mt-5">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Full Name</th>
                         <th>Address</th>
                         <th>Phone</th>
-                        <th>Mail</th>
+                        <th>Email</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    { products.map((products, index) => (
-                        <tr key={ products.id }>
+                    { Profile.map((Profile, index) => (
+                        <tr key={ Profile.id }>
                             <td>{ index + 1 }</td>
-                            <td>{ products.name }</td>
-                            <td>{ products.address }</td>
-                            <td>{ products.phone}</td>
-                            <td>{ products.mail}</td>
+                            <td>{ Profile.name }</td>
+                            <td>{ Profile.address }</td>
+                            <td>{ Profile.phone}</td>
+                            <td>{ Profile.mail}</td>
                             <td>
-                                <Link to={`/edit/${products.id}`} className="button is-small is-info">Edit</Link>
-                                <button onClick={ () => deleteProduct(products.id) } className="button is-small is-danger">Delete</button>
+                                <Link to={`/edit/${Profile.id}`} className="button is-small is-info mr-3 mb-3">Edit</Link>
+                                <button onClick={ () => deleteProfile(Profile.id) } className="button is-small is-danger">Delete</button>
                             </td>
                         </tr>
                     )) }

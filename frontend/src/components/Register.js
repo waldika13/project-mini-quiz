@@ -7,6 +7,7 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
+    const [msg, setMsg] = useState('');
   
     const navigate = useNavigate();
 
@@ -21,17 +22,20 @@ const Register = () => {
             });
             navigate('/');
         } catch (error) {
-            
+            if(error.response){
+                setMsg(error.response.data.msg);
+            }
         }    
     }
   return (
-    <section className="hero has-background-grey-light is-success is-fullheight is-fullwidth">
+    <section className="hero is-fullheight has-background-white-ter is-fullwidth">
       <div className="hero-body">
         <div className="container">
-          <div className="columns">
+          <div className="columns is-centered">
               <div className="column is-4-desktop">
                  
                   <form onSubmit={Register} className=' box'>
+                  <p className='has-text-centered has-text-danger-dark'>{msg}</p>
                       <div className="fields mt-5">
                           <label className="label">Nama</label>
                           <div className="control">
@@ -63,6 +67,8 @@ const Register = () => {
                       </div>
                       <div className="fields mt-5">
                          <button className='button is-success is-fullwidth'>Register</button>
+                         <label className="label has-text-centered mt-2">OR</label>
+                         <a href='/' className="button is-light is-fullwidth"> Login </a>
                       </div>
                   </form>
               </div>

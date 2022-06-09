@@ -3,7 +3,7 @@ import db from "../config/database.js";
  
 const { DataTypes } = Sequelize;
  
-const Product = db.define('products',{
+const Profile = db.define('profile',{
     name:{
         type: DataTypes.STRING
     },
@@ -20,4 +20,4 @@ const Product = db.define('products',{
     freezeTableName: true
 });
  
-export default Product;
+export default Profile;
